@@ -108,9 +108,10 @@ app.post("/register", async (req, res) => {
         //sending token in cookie to user 
         res.cookie("token", token, {
             httpOnly: true,
-            sameSite: "lax", // for cross origin 
-            secure: false, // true for https
-        });
+            sameSite: "None",  // ✅ allows cross-origin cookies
+            secure: true,      // ✅ required when using HTTPS (Netlify & Render both are)
+            maxAge: 24 * 60 * 60 * 1000 // optional: cookie expiry (1 day)
+          });
         res.json({ flag: true });
     } catch (error) {
        console.log(error);
@@ -136,9 +137,10 @@ app.post("/login", async (req, res) => {
                 //sending token in cookie to user 
                 res.cookie("token", token, {
                     httpOnly: true,
-                    sameSite: "lax", // for cross origin 
-                    secure: false, // true for https
-                });
+                    sameSite: "None",  // ✅ allows cross-origin cookies
+                    secure: true,      // ✅ required when using HTTPS (Netlify & Render both are)
+                    maxAge: 24 * 60 * 60 * 1000 // optional: cookie expiry (1 day)
+                  });
                 res.json({ flag: true }); // successfully logged in
             } else {
                 res.json({ flag: false }); // invalid password
