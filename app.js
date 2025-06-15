@@ -32,7 +32,7 @@ main().then(() => {
 app.use(cookieParser());
 app.use(cors(
     {
-        origin: "http://localhost:3000",
+        origin: process.env.REACT_DASHBOARD_URL,
         credentials: true
     }
 )); // allow sending request to other port or other domain
